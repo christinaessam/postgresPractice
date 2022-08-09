@@ -1,7 +1,7 @@
 import db from "../database";
 
 export type Book = {
-	id: number;
+	id?: number;
 	title: string;
 	author: string;
 	total_pages: number;
@@ -43,7 +43,7 @@ export class BookLibrary {
 
 	async show(id: string): Promise<Book> {
 		try {
-			const sql = "SELECT * FROM books WHERE id=($1)";
+			const sql = "SELECT * FROM books WHERE id=($1);";
 			// @ts-ignore
 			const conn = await db.connect();
 			const result = await conn.query(sql, [id]);
